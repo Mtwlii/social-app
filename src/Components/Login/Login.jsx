@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import * as zod from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import  { AuthContext } from "../../Context/AuthContext";
+import { AuthContext } from "../../Context/AuthContext";
 
 const schema = zod.object({
   emailOrUsername: zod
@@ -64,8 +64,10 @@ export default function Login() {
       .then((res) => {
         localStorage.setItem("userToken", res.data.data.token);
         localStorage.setItem("userDataEmail", res.data.data.user.email);
+        localStorage.setItem("userId", res.data.data.user._id);
         setUserLogin(res.data.data.token);
         setUserDataEmail(res.data.data.user.email);
+
         navigate("/home");
       })
       .catch((err) => {

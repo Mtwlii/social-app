@@ -7,10 +7,13 @@ import Register from "./Components/Register/Register";
 import Notfound from "./Components/Notfound/Notfound";
 import CounterContextProvider from "./Context/CounterContext";
 import Profile from "./Components/Profile/Profile";
-import AuthContextProvider from "./Context/AuthContext";
-import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import GuestRoute from "./Components/ProtectedRoute/GuestRoute";
-
+import AuthContextProvider from "./Context/AuthContext";
+import { DarkModeProvider } from "./Context/DarkModeContext";
+import PostDetails from "./Components/PostDetails/PostDetails";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserProfile from "./Components/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +36,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: "*", element: <Notfound /> },
       {
         path: "profile",
         element: (
@@ -42,6 +44,23 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "posts/:postId",
+        element: (
+          <ProtectedRoute>
+            <PostDetails />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path:"/users/:userId",
+        element: (
+          <ProtectedRoute>
+            <UserProfile /> 
+          </ProtectedRoute>
+        ),
+      },
+      { path: "*", element: <Notfound /> },
     ],
   },
   {
@@ -62,15 +81,19 @@ const router = createBrowserRouter([
   },
   { path: "*", element: <Notfound /> },
 ]);
+
+const queryClient = new QueryClient();
 const App = () => {
   return (
-    <>
-      <AuthContextProvider>
-        <CounterContextProvider>
-          <RouterProvider router={router}></RouterProvider>
-        </CounterContextProvider>
-      </AuthContextProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <DarkModeProvider>
+        <AuthContextProvider>
+          <CounterContextProvider>
+            <RouterProvider router={router} />
+          </CounterContextProvider>
+        </AuthContextProvider>
+      </DarkModeProvider>
+    </QueryClientProvider>
   );
 };
 
