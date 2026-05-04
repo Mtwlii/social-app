@@ -1,16 +1,109 @@
-# React + Vite
+# 🌐 Social App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern social media application built with React 19 and Vite, featuring post creation, image uploads, authentication, and a clean responsive UI.
 
-Currently, two official plugins are available:
+**🔗 Live Demo:** [socialhub-blond-delta.vercel.app](https://socialhub-blond-delta.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔐 User authentication (Register / Login)
+- 📝 Create posts with text and image support
+- 🖼️ Image preview and crop before uploading
+- 🔔 Toast notifications via Sonner
+- 🌙 Dark mode support
+- 📱 Fully responsive design
+- ⚡ Fast data fetching with TanStack Query
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+| Category | Technology |
+|---|---|
+| Framework | React 19 + Vite |
+| Routing | React Router DOM v7 |
+| Styling | Tailwind CSS v4 |
+| UI Components | HeroUI + Flowbite |
+| Data Fetching | TanStack React Query v5 |
+| Forms | React Hook Form + Zod |
+| HTTP Client | Axios |
+| Animations | Framer Motion |
+| Icons | React Icons |
+| Notifications | Sonner |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Mtwlii/social-app.git
+
+# Navigate to the project directory
+cd social-app
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+The app will be running at `http://localhost:5173`
+
+---
+
+## 📜 Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run preview   # Preview production build
+npm run lint      # Run ESLint
+```
+
+---
+
+## 📁 Project Structure
+
+```
+social-app/
+├── public/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── context/        # React context providers
+│   ├── hooks/          # Custom hooks
+│   └── main.jsx        # App entry point
+├── index.html
+├── vite.config.js
+└── package.json
+```
+
+---
+
+## 🌍 Deployment
+
+This project is deployed on **Vercel**. To deploy your own instance:
+
+```bash
+npm run build
+```
+
+Then connect your GitHub repo to [Vercel](https://vercel.com) for automatic deployments.
+
+---
+
+## 👤 Author
+
+**Mtwlii**
+- GitHub: [@Mtwlii](https://github.com/Mtwlii)
