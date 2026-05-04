@@ -176,7 +176,11 @@ export default function PostCard({ post }) {
 
         <div className="flex-1 min-w-0">
           <Link
-            to={`/users/${post?.user?._id}`}
+            to={
+              post?.user?._id === myUserId
+                ? "/profile"
+                : `/users/${post?.user?._id}`
+            }
             className="text-sm font-medium text-gray-900 dark:text-white hover:underline"
           >
             {post?.user?.name || "Unknown"}

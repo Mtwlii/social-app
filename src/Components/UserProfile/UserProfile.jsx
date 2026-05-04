@@ -35,7 +35,8 @@ export default function UserProfile() {
   });
 
   // ============ Follow/Unfollow ============
-  const isFollowing = user?.followers?.includes(myUserId) || false;
+  const isFollowing =
+    user?.followers?.some((f) => (f._id || f) === myUserId) || false;
 
   const { mutate: toggleFollow, isPending: isFollowing_ } = useMutation({
     mutationFn: () =>
@@ -84,7 +85,7 @@ export default function UserProfile() {
               <button
                 onClick={() => toggleFollow()}
                 disabled={isFollowing_}
-                className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors flex items-center gap-2 ${
+                className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors flex items-center gap-2  cursor-pointer ${
                   isFollowing
                     ? "bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-red-500"
                     : "bg-purple-600 hover:bg-purple-700 text-white"
