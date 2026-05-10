@@ -5,6 +5,7 @@ import PostCard from "./PostCard";
 import Loading from "../Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import CreatePost from "../CreatePost/CreatePost";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   // const [allPosts, setAllPosts] = useState(null);
@@ -80,6 +81,11 @@ const Home = () => {
 
   return (
     <div className="flex flex-col gap-4 max-w-xl mx-auto pt-20 py-6 px-4">
+       <Helmet>
+              <meta charSet="utf-8" />
+              <title>Home</title>
+              <link rel="icon" href="http://mysite.com/example" />
+            </Helmet>
       <CreatePost />
       {data?.data?.data.posts?.map((post) => (
         <PostCard key={post._id} post={post} />

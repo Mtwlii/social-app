@@ -14,6 +14,8 @@ import { DarkModeProvider } from "./Context/DarkModeContext";
 import PostDetails from "./Components/PostDetails/PostDetails";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserProfile from "./Components/UserProfile/UserProfile";
+import DetectOffline from "./Components/DetectOffline/DetectOffline";
+import { useNetworkState } from "react-use";
 
 const router = createBrowserRouter([
   {
@@ -53,10 +55,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:"/users/:userId",
+        path: "/users/:userId",
         element: (
           <ProtectedRoute>
-            <UserProfile /> 
+            <UserProfile />
           </ProtectedRoute>
         ),
       },
@@ -84,16 +86,21 @@ const router = createBrowserRouter([
 
 const queryClient = new QueryClient();
 const App = () => {
+    const { online } = useNetworkState();
   return (
-    <QueryClientProvider client={queryClient}>
-      <DarkModeProvider>
-        <AuthContextProvider>
-          <CounterContextProvider>
-            <RouterProvider router={router} />
-          </CounterContextProvider>
-        </AuthContextProvider>
-      </DarkModeProvider>
-    </QueryClientProvider>
+    <>
+      {!online && <DetectOffline />}
+
+      <QueryClientProvider client={queryClient}>
+        <DarkModeProvider>
+          <AuthContextProvider>
+            <CounterContextProvider>
+              <RouterProvider router={router} />
+            </CounterContextProvider>
+          </AuthContextProvider>
+        </DarkModeProvider>
+      </QueryClientProvider>
+    </>
   );
 };
 

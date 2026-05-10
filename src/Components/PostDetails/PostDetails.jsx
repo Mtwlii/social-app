@@ -10,6 +10,7 @@ import {
   FaSpinner,
 } from "react-icons/fa";
 import CommentsSection from "./../Comment/CommentsSection";
+import { Helmet } from "react-helmet";
 
 export default function PostDetails() {
   const { postId } = useParams();
@@ -64,6 +65,11 @@ export default function PostDetails() {
 
   return (
     <div className="max-w-xl mx-auto py-20 px-4 flex flex-col gap-4">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Post Details of {post?.user?.name}</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </Helmet>
       {post && (
         <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-700 rounded-2xl overflow-hidden">
           {/* Header */}

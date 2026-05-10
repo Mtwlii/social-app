@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { FaSpinner } from "react-icons/fa";
 import PostCard from "../Home/PostCard";
+import { Helmet } from "react-helmet";
 
 export default function UserProfile() {
   const { userId } = useParams();
@@ -60,6 +61,11 @@ export default function UserProfile() {
 
   return (
     <div className="max-w-xl mx-auto py-20 px-4 flex flex-col gap-4">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Profile | {user?.name}</title>
+        <link rel="icon" href="http://mysite.com/example" />
+      </Helmet>
       {/* Profile Card */}
       <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-700 rounded-2xl overflow-hidden">
         {/* Cover */}
