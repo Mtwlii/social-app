@@ -73,9 +73,13 @@ export default function Register() {
   const [isLoading, setisLoading] = useState(false);
   const { setUserLogin, setUserDataEmail } = useContext(AuthContext);
 
+  // State for the 3-select date of birth
+  const [dob, setDob] = useState({ day: "", month: "", year: "" });
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -90,6 +94,18 @@ export default function Register() {
     mode: "onChange",
   });
 
+  // Helper to update dateOfBirth field whenever any part of dob changes
+  function handleDobChange(field, value) {
+    const updated = { ...dob, [field]: value };
+    setDob(updated);
+    if (updated.day && updated.month && updated.year) {
+      const formatted = `${updated.year}-${String(updated.month).padStart(2, "0")}-${String(updated.day).padStart(2, "0")}`;
+      setValue("dateOfBirth", formatted, { shouldValidate: true });
+    } else {
+      setValue("dateOfBirth", "", { shouldValidate: false });
+    }
+  }
+
   function handleRegister(values) {
     setisLoading(true);
 
@@ -102,8 +118,6 @@ export default function Register() {
         if (res.data.message === "account created") {
           localStorage.setItem("userToken", res.data.data.token);
           localStorage.setItem("UserDataEmail", res.data.data.user.email);
-          // console.log("userData", res.data.data.user.email);
-          
           setUserLogin(res.data.data.token);
           setUserDataEmail(res.data.data.user.email);
           navigate("/");
@@ -123,6 +137,22 @@ export default function Register() {
         ? "border-red-300 bg-red-50"
         : "border-gray-200 focus-within:border-blue-400"
     }`;
+
+  const currentYear = new Date().getFullYear();
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
@@ -226,8 +256,9 @@ export default function Register() {
               )}
             </div>
 
-            {/* Gender + DOB row */}
-            <div className="grid grid-cols-2 gap-3">
+            {/* Gender + DOB */}
+            <div className="flex flex-col gap-3">
+              {/* Gender */}
               <div className="flex flex-col gap-1">
                 <div className={inputClass(errors.gender)}>
                   <FaUser className="text-gray-400 text-sm flex-shrink-0" />
@@ -249,15 +280,58 @@ export default function Register() {
                 )}
               </div>
 
+              {/* Date of Birth - 3 selects */}
               <div className="flex flex-col gap-1">
-                <div className={inputClass(errors.dateOfBirth)}>
+                <div className={`${inputClass(errors.dateOfBirth)} gap-2 px-3`}>
                   <FaCalendar className="text-gray-400 text-sm flex-shrink-0" />
-                  <input
-                    {...register("dateOfBirth")}
-                    type="date"
-                    className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
-                  />
+
+                  <select
+                    value={dob.day}
+                    onChange={(e) => handleDobChange("day", e.target.value)}
+                    className="outline-none text-sm text-gray-700 bg-transparent flex-1"
+                  >
+                    <option value="">Day</option>
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map((d) => (
+                      <option key={d} value={d}>
+                        {d}
+                      </option>
+                    ))}
+                  </select>
+
+                  <span className="text-gray-300">/</span>
+
+                  <select
+                    value={dob.month}
+                    onChange={(e) => handleDobChange("month", e.target.value)}
+                    className="outline-none text-sm text-gray-700 bg-transparent flex-1"
+                  >
+                    <option value="">Month</option>
+                    {months.map((m, i) => (
+                      <option key={i} value={i + 1}>
+                        {m}
+                      </option>
+                    ))}
+                  </select>
+
+                  <span className="text-gray-300">/</span>
+
+                  <select
+                    value={dob.year}
+                    onChange={(e) => handleDobChange("year", e.target.value)}
+                    className="outline-none text-sm text-gray-700 bg-transparent flex-1"
+                  >
+                    <option value="">Year</option>
+                    {Array.from(
+                      { length: 82 },
+                      (_, i) => currentYear - 18 - i,
+                    ).map((y) => (
+                      <option key={y} value={y}>
+                        {y}
+                      </option>
+                    ))}
+                  </select>
                 </div>
+
                 {errors.dateOfBirth && (
                   <span className="text-xs text-red-500 px-1">
                     {errors.dateOfBirth.message}
