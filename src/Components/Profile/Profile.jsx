@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import ReactCrop, { centerCrop, makeAspectCrop } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import PostCard from "../Home/PostCard";
-import Loading from "../Loading/Loading";
+// import Loading from "../Loading/Loading";
 import { Helmet } from "react-helmet";
 import CreatePost from './../CreatePost/CreatePost';
 
@@ -64,6 +64,8 @@ export default function Profile() {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profile"] });
+      queryClient.invalidateQueries({ queryKey: ["userPosts", myUserId] });
+      queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
       setShowCropModal(false);
       setImgSrc("");
     },
@@ -88,7 +90,7 @@ export default function Profile() {
     setCrop(centerAspectCrop(width, height, 1)); // 1 = مربع
   }
 
-  // لما يضغط Save
+  // لما المستخدم يقوم بحفظ Save
   async function handleCropSave() {
     if (!completedCrop || !imgRef.current) return;
 
