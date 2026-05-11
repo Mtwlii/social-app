@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function PostCard({ post }) {
   const myUserId = localStorage.getItem("userId");
@@ -81,7 +82,8 @@ export default function PostCard({ post }) {
         headers,
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
+        queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
+        queryClient.invalidateQueries({ queryKey: ["userPosts", myUserId] });
     },
   });
 
@@ -108,9 +110,13 @@ export default function PostCard({ post }) {
         { headers: { ...headers, "Content-Type": "application/json" } },
       ),
     onSuccess: () => {
+      toast.success("Post shared successfully! 🎉");
       queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
       setShowShareModal(false);
       setShareBody("");
+    },
+    onError: () => {
+      toast.error("Failed to share post!");
     },
   });
 

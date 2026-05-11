@@ -43,6 +43,7 @@ export default function CreatePost() {
     if (data.image?.[0]) formData.append("image", data.image[0]);
     createPost(formData);
   }
+  const myUserId = localStorage.getItem("userId");
 
   const { mutate: createPost, isPending } = useMutation({
     mutationFn: (formData) =>
@@ -52,7 +53,8 @@ export default function CreatePost() {
         },
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
+      queryClient.invalidateQueries({ queryKey: ["userPosts", myUserId] });
+        queryClient.invalidateQueries({ queryKey: ["getAllPosts"] });
       reset();
       setImagePreview(null);
       fileInputRef.current.value = "";

@@ -16,6 +16,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import DetectOffline from "./Components/DetectOffline/DetectOffline";
 import { useNetworkState } from "react-use";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,35 @@ const App = () => {
         <DarkModeProvider>
           <AuthContextProvider>
             <CounterContextProvider>
+              <Toaster
+                position="top-center"
+                toastOptions={{
+                  success: {
+                    style: {
+                      background: "#7c3aed", // purple-600
+                      color: "#fff",
+                      borderRadius: "12px",
+                      fontSize: "14px",
+                    },
+                    iconTheme: {
+                      primary: "#fff",
+                      secondary: "#7c3aed",
+                    },
+                  },
+                  error: {
+                    style: {
+                      background: "#ef4444", // red-500
+                      color: "#fff",
+                      borderRadius: "12px",
+                      fontSize: "14px",
+                    },
+                    iconTheme: {
+                      primary: "#fff",
+                      secondary: "#ef4444",
+                    },
+                  },
+                }}
+              />
               <RouterProvider router={router} />
             </CounterContextProvider>
           </AuthContextProvider>

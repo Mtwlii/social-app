@@ -7,6 +7,7 @@ import "react-image-crop/dist/ReactCrop.css";
 import PostCard from "../Home/PostCard";
 import Loading from "../Loading/Loading";
 import { Helmet } from "react-helmet";
+import CreatePost from './../CreatePost/CreatePost';
 
 function centerAspectCrop(mediaWidth, mediaHeight, aspect) {
   return centerCrop(
@@ -135,6 +136,7 @@ export default function Profile() {
         <title>Profile | {user?.name}</title>
         <link rel="icon" href="http://mysite.com/example" />
       </Helmet>
+
       {/* Profile Card */}
       <div className="bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-700 rounded-2xl overflow-hidden">
         <div className="h-24 bg-gradient-to-r from-purple-500 to-blue-500" />
@@ -200,7 +202,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-
+      <CreatePost />
       {/* Posts */}
       <div className="flex flex-col gap-4">
         {posts.length === 0 ? (
