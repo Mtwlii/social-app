@@ -135,7 +135,7 @@ export default function Profile() {
     <div className="max-w-xl mx-auto py-20 px-4 flex flex-col gap-4">
       <Helmet>
         <meta charSet="utf-8" />
-        <title>Profile | {user?.name}</title>
+       <title>{user?.name ? `Profile | ${user.name}` : "Profile"}</title>
         <link rel="icon" href="http://mysite.com/example" />
       </Helmet>
 

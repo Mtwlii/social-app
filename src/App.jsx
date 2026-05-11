@@ -17,6 +17,7 @@ import UserProfile from "./Components/UserProfile/UserProfile";
 import DetectOffline from "./Components/DetectOffline/DetectOffline";
 import { useNetworkState } from "react-use";
 import { Toaster } from "react-hot-toast";
+import ChangePassword from './Components/ChangePassword/ChangePassword';
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <Profile />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/change-password",
+        element: (
+          <ProtectedRoute>
+            <ChangePassword />
           </ProtectedRoute>
         ),
       },
