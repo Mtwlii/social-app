@@ -107,3 +107,10 @@ Then connect your GitHub repo to [Vercel](https://vercel.com) for automatic depl
 
 **Mtwlii**
 - GitHub: [@Mtwlii](https://github.com/Mtwlii)
+
+
+## Roadmap (edit freely)
+- [ ] Comments and likes on posts
+- [ ] Notifications
+- [ ] Tests (unit and end to end)
+- [ ] Performance pass and accessibility check
