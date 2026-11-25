@@ -6,6 +6,16 @@ A modern social media application built with React 19 and Vite, featuring post c
 
 ---
 
+## 📸 Screenshots
+
+### 🔐 Login
+![Login](docs/screenshots/login.png)
+
+### 📝 Create Account
+![Create account](docs/screenshots/register.png)
+
+---
+
 ## ✨ Features
 
 - 🔐 User authentication (Register / Login)
